@@ -99,6 +99,7 @@ $('#historyButton').click (function() {
   $('#about').hide();
 });
 
+
 $(document).ready(function() {
 
   $("#input").on("submit", function(e) {
@@ -135,6 +136,3 @@ $(document).ready(function() {
       });
   });
 });
-
-
-
