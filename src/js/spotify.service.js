@@ -10,7 +10,7 @@ export default class Spotify {
 
   static searchSpotify(keyword) {
     const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${process.env.TOKEN}`);
+    myHeaders.append("Authorization", `Bearer BQChmzuXSw8geQrrUuaFDO7-QSTtMtQ08bhLOMBva6TsHvgRLeZhGNu9_KvpkKlPLQkYYDclNwOZ8uSbGI33lJZXPNXwQkPVgLJWXP7NUNyka2TzlQ7ureWSmka3TBv7JNN9Bs9syXsencUcAgbTyA0Ei0qFqgVH`);
     myHeaders.append("Cookie", "_ga=GA1.2.456045822.1606765238; _gid=GA1.2.637614845.1606765238; sp_dc=AQB5RMpfdYpkmkJlRHPeYxSSfyTRPpkKySEvxhbkmixFgyFT0ZOlFeh5KY4xSVAXFpCp276qTTx4nbxD11fqn-6DnKhR9PuJ6yLMzkXUPg; sp_key=66b31764-29a3-4c2f-92c8-38ed42c7b352; _gat=1");
 
     const requestOptions = {
