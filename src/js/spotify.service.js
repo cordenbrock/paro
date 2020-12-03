@@ -6,21 +6,11 @@
 
 export default class Spotify {
 
-  // static login() {
-  //   console.log(`https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}`);
-  //   return fetch(`https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}`, 
-  //   {
-  //     // mode: "no-cors",
-  //     headers: {"Access-Control-Allow-Origin": '*'}
-  //   })
-  //   // .then(response => {
-  //   //   console.log(response);
-  //   // })
-  // }
+
 
   static searchSpotify(keyword) {
     const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer BQBSvaWNGXSlTNu5paEcCTQoTLvD7zLnQlO1zunCf1fdS0Sz2mV4Fjft2FlGfO35gQEX5ZL_i3CE4D7gCZ2GeCXIvsaw0pD5zJpEvzN2hEx_7UVFf6DmLeZul3e-AIbI_SQX38IvgFpcy0lhQUWztCZ4-DtqLlnd`);
+    myHeaders.append("Authorization", `Bearer BQAzHXS6Hc5AHnf6cCm6RtYlKCNE0RtpQci8jnUlEalJNxJAB_jcwDGxekrRd0r5tzk_c3BWut5A70cL4MAJsl9yCj2ty4cM7fkRCmwZw2m59h3vf2Ryo8P9Ukkk2QCpwEabyrOtC9xmSc2QPPJlI-1esh1qIlzc`);
     myHeaders.append("Cookie", "_ga=GA1.2.456045822.1606765238; _gid=GA1.2.637614845.1606765238; sp_dc=AQB5RMpfdYpkmkJlRHPeYxSSfyTRPpkKySEvxhbkmixFgyFT0ZOlFeh5KY4xSVAXFpCp276qTTx4nbxD11fqn-6DnKhR9PuJ6yLMzkXUPg; sp_key=66b31764-29a3-4c2f-92c8-38ed42c7b352; _gat=1");
 
     const requestOptions = {
