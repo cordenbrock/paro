@@ -4,15 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Spotify from './../src/js/spotify.service.js';
 import DiscogsService from './../src/js/discogs-services.js';
-import { userHasValidSpotifyToken, redirectToSpotifyOAuth } from './../src/js/authorization.js'; // eslint-disable-line no-unused-vars
-
-
-// 1. when the user successfully auths, they will be redirected to your app, and the url will have params after the #.  
-//    Parse these to get the token and the token expiration. Store them in local storage.
-// 2. determine if user has a valid Oauth token already
-// 3. if not, redirect to the spotify auth url in the docs with the necessary params
-//    so the user can authenticate and get a token
-
+import { userHasValidSpotifyToken, redirectToSpotifyOAuth } from './../src/js/authorization.js';
 
 
 // Business Logic //
@@ -81,7 +73,6 @@ function printNoResult() {
 }
 
 
-
 function parseUrlArgsAndPutInLocalStorage() {
 
   let access_token = null;
@@ -89,8 +80,8 @@ function parseUrlArgsAndPutInLocalStorage() {
 
   if (window.location.hash.length > 1) {
     const paramsString = window.location.hash.substring(1);
-    const paramsArray = paramsString.split('&'); // ["thing=100", "thing2=otherthing", "thing3=500"]
-    let params = []; // [["thing", "100"], ["thing2", "otherthing"], ["thing3", "500"]]
+    const paramsArray = paramsString.split('&');
+    let params = [];
     
     for (const element of paramsArray) {
       params.push(element.split('='));
