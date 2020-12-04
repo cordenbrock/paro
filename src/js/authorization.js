@@ -16,7 +16,7 @@ export function userHasValidSpotifyToken() {
 
 export function redirectToSpotifyOAuth() {
   const client_id = '56346d067885461f91b9a4b099c49290';
-  const redirect_uri = 'http://localhost:8080';
+  const redirect_uri = 'https://paro-for-president.herokuapp.com';
   const scope = 'user-read-email user-read-private';
 
   let url = 'https://accounts.spotify.com/authorize';
