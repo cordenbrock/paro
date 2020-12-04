@@ -80,13 +80,12 @@ function printNoResult() {
   $("#featYear").html(" ");
 }
 
+
+
 function parseUrlArgsAndPutInLocalStorage() {
-  // parse the url args that might have been passed from spotify auth
-  // store token and expiration in local storage
 
   let access_token = null;
   let expires_in = null;
-
 
   if (window.location.hash.length > 1) {
     const paramsString = window.location.hash.substring(1);
@@ -97,8 +96,6 @@ function parseUrlArgsAndPutInLocalStorage() {
       params.push(element.split('='));
     }
 
-    console.log(params);
-
     for (const kv of params) {
       if (kv[0] === "access_token") {
         access_token = kv[1];
@@ -107,18 +104,13 @@ function parseUrlArgsAndPutInLocalStorage() {
       }
     }
 
-    console.log(access_token);
-    console.log(expires_in);
-
     if (access_token) {
-      // put into local storage
       localStorage.setItem('spotifyAuthToken', access_token);
     }
 
     if (expires_in) {
       const nowSeconds = Date.now() / 1000;
       const expirySeconds = nowSeconds + expires_in;
-      // put expirySeconds into local storage
       localStorage.setItem('spotifyAuthTokenExpiration', expirySeconds);
     }
   }
