@@ -9,7 +9,9 @@ Paro exists to bridge the preferential rift between analog and digital listening
 
 Paro takes user-input keywords to search through Spotify's library and return a playable album + album details. Paro checks to see if the album is available for purchase on Discogs' vinyl marketplace and will provide a link for purchase if so. Paro was built using APIs kindly provided by Spotify and Discogs
 
-Paro was built collaboratively by Ben, Zahnen, Eric, Riley, Shannon, and Cory as a team-based project while studying at Epicodus. The project makes use of concepts recently learned which include object notation, making API calls, writing functions, Node.js.  
+Paro was built collaboratively by Ben, Zahnen, Eric, Riley, Shannon, and Cory as a team-based project while studying at Epicodus. The project makes use of concepts recently learned which include object notation, making API calls, writing functions, Node.js.
+
+View site: https://paro-for-president.herokuapp.com/
 
 ---  
 
