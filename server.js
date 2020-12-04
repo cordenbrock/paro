@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const app = express();
 const distPath = path.join(__dirname, 'dist');
 
@@ -11,5 +11,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log('Server is up!');
+  console.log('Server is up');
 });

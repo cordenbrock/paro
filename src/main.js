@@ -4,6 +4,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Spotify from './../src/js/spotify.service.js';
 import DiscogsService from './../src/js/discogs-services.js';
+import { userHasValidSpotifyToken, redirectToSpotifyOAuth } from './../src/js/authorization.js'; // eslint-disable-line no-unused-vars
+
+
+// 1. when the user successfully auths, they will be redirected to your app, and the url will have params after the #.  
+//    Parse these to get the token and the token expiration. Store them in local storage.
+// 2. determine if user has a valid Oauth token already
+// 3. if not, redirect to the spotify auth url in the docs with the necessary params
+//    so the user can authenticate and get a token
+
+
 
 // Business Logic //
 
@@ -70,6 +80,52 @@ function printNoResult() {
   $("#featYear").html(" ");
 }
 
+function parseUrlArgsAndPutInLocalStorage() {
+  // parse the url args that might have been passed from spotify auth
+  // store token and expiration in local storage
+
+  let access_token = null;
+  let expires_in = null;
+
+
+  if (window.location.hash.length > 1) {
+    const paramsString = window.location.hash.substring(1);
+    const paramsArray = paramsString.split('&'); // ["thing=100", "thing2=otherthing", "thing3=500"]
+    let params = []; // [["thing", "100"], ["thing2", "otherthing"], ["thing3", "500"]]
+    
+    for (const element of paramsArray) {
+      params.push(element.split('='));
+    }
+
+    console.log(params);
+
+    for (const kv of params) {
+      if (kv[0] === "access_token") {
+        access_token = kv[1];
+      } else if (kv[0] === "expires_in") {
+        expires_in = parseInt(kv[1]);
+      }
+    }
+
+    console.log(access_token);
+    console.log(expires_in);
+
+    if (access_token) {
+      // put into local storage
+      localStorage.setItem('spotifyAuthToken', access_token);
+    }
+
+    if (expires_in) {
+      const nowSeconds = Date.now() / 1000;
+      const expirySeconds = nowSeconds + expires_in;
+      // put expirySeconds into local storage
+      localStorage.setItem('spotifyAuthTokenExpiration', expirySeconds);
+    }
+  }
+}
+
+
+
 $('#readMore').click(function () {
   $('#intro').fadeOut();
   $('#output').fadeIn();
@@ -110,6 +166,11 @@ $('#historyButton').click(function () {
 
 
 $(document).ready(function () {
+
+  parseUrlArgsAndPutInLocalStorage();
+  if (!userHasValidSpotifyToken()) {
+    redirectToSpotifyOAuth();
+  }
 
   $("#input").on("submit", function (e) {
     e.preventDefault();
