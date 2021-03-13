@@ -6,9 +6,10 @@ body {
   background: #fbf6f1;
   color: #000000;
   font-family: 'Nobile', Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    line-height: 25px;
+  font-size: 13px;
+  line-height: 25px;
   font-weight: normal;
+  display: block !important;
 }
 
 h1, h2, h3, h4, h5, .btn, .navbar-nav, .list-group-item {
