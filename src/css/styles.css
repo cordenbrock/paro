@@ -79,6 +79,13 @@ form {
   font-weight: bold;
 }
 
+a {
+  text-decoration: underline dashed;
+  font-family: 'Corben', Georgia, Times, serif;
+  font-weight: bold;
+  color: black;
+}
+
 #about a {
   text-decoration: underline dashed;
   font-family: 'Corben', Georgia, Times, serif;

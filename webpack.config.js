@@ -17,7 +17,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'vinyl-suggester',
+      title: 'Paro',
       template: './src/index.html',
       inject: 'body'
     })

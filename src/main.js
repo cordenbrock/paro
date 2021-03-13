@@ -7,8 +7,6 @@ import DiscogsService from './../src/js/discogs-services.js';
 import { userHasValidSpotifyToken, redirectToSpotifyOAuth } from './../src/js/authorization.js';
 
 
-// Business Logic //
-
 function buildAlbumObj(obj) {
   let artistInfo, albumInfo, albumLink, albumCover, albumID, spotifyData, albumDate;
   artistInfo = obj.artists[0].name;
@@ -17,7 +15,14 @@ function buildAlbumObj(obj) {
   albumCover = obj.images[0].url;
   albumID = obj.id;
   albumDate = obj.release_date;
-  spotifyData = { artist: artistInfo, album: albumInfo, link: albumLink, cover: albumCover, ID: albumID, date: albumDate };
+  spotifyData = { 
+    artist: artistInfo,
+    album: albumInfo,
+    link: albumLink,
+    cover: albumCover,
+    ID: albumID,
+    date: albumDate
+  };
 
   return spotifyData;
 }
@@ -48,30 +53,6 @@ function discogsRequest(artist, album, id) {
       }
     });
 }
-
-// User Interface Logic //
-
-function printCard(obj) {
-  $("#cardMenu").prepend(`<div class="album-data card col-4"><img class="card-img-top" src="${obj.cover}" alt="Cover Art for the Album ${obj.album}"><ul class="list-group list-group-flush"><li class="list-group-item">${obj.artist}</li><li class="list-group-item">${obj.album}</li><li class="list-group-item"><a href="https://open.spotify.com/album/${obj.ID}" target="_blank">Stream Album on Spotify</a></li><li class="list-group-item" id="${obj.ID}"></li></ul></div>`);
-}
-
-function displayInfo(albumObj) {
-  $("#featImage").html(`<img class="card-img-top" id="heroImage" src="${albumObj.cover}" alt="Cover Art for the Album ${albumObj.album}">`);
-  $("#featWidget").html(`<iframe src="https://open.spotify.com/embed/album/${albumObj.ID}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`);
-  $("#featArtist").html(`<h4>Artist Name:</h4> ${albumObj.artist}`);
-  $("#featAlbum").html(`<h4>Album Name:</h4> ${albumObj.album}`);
-  $("#featYear").html(`<h4>Release Date:</h4> ${albumObj.date}`);
-  discogsRequest(albumObj.artist, albumObj.album, albumObj.ID);
-}
-
-function printNoResult() {
-  $("#featImage").html(`<h2>No Result Found...</h2>`);
-  $("#featWidget").html(" ");
-  $("#featArtist").html(" ");
-  $("#featAlbum").html(" ");
-  $("#featYear").html(" ");
-}
-
 
 function parseUrlArgsAndPutInLocalStorage() {
 
@@ -107,6 +88,28 @@ function parseUrlArgsAndPutInLocalStorage() {
   }
 }
 
+
+
+function printCard(obj) {
+  $("#cardMenu").prepend(`<div class="album-data card col-4"><img class="card-img-top" src="${obj.cover}" alt="Cover Art for the Album ${obj.album}"><ul class="list-group list-group-flush"><li class="list-group-item">${obj.artist}</li><li class="list-group-item">${obj.album}</li><li class="list-group-item"><a href="https://open.spotify.com/album/${obj.ID}" target="_blank">Stream Album on Spotify</a></li><li class="list-group-item" id="${obj.ID}"></li></ul></div>`);
+}
+
+function displayInfo(albumObj) {
+  $("#featImage").html(`<img class="card-img-top" id="heroImage" src="${albumObj.cover}" alt="Cover Art for the Album ${albumObj.album}">`);
+  $("#featWidget").html(`<iframe src="https://open.spotify.com/embed/album/${albumObj.ID}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`);
+  $("#featArtist").html(`<h4>Artist Name:</h4> ${albumObj.artist}`);
+  $("#featAlbum").html(`<h4>Album Name:</h4> ${albumObj.album}`);
+  $("#featYear").html(`<h4>Release Date:</h4> ${albumObj.date}`);
+  discogsRequest(albumObj.artist, albumObj.album, albumObj.ID);
+}
+
+function printNoResult() {
+  $("#featImage").html(`<h2>No Result Found...</h2>`);
+  $("#featWidget").html(" ");
+  $("#featArtist").html(" ");
+  $("#featAlbum").html(" ");
+  $("#featYear").html(" ");
+}
 
 
 $('#readMore').click(function () {
@@ -149,14 +152,17 @@ $('#historyButton').click(function () {
 
 
 $(document).ready(function () {
-
+  
   parseUrlArgsAndPutInLocalStorage();
-  if (!userHasValidSpotifyToken()) {
-    redirectToSpotifyOAuth();
-  }
+  $("#login").on("click", function () {
+    if (!userHasValidSpotifyToken()) {
+      redirectToSpotifyOAuth();
+    }
+  });
 
   $("#input").on("submit", function (e) {
     e.preventDefault();
+    
     let search, searchOption;
     search = $("#searchTerm").val();
     searchOption = $("#searchOption").val();
